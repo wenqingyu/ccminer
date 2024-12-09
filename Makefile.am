@@ -127,11 +127,11 @@ endif
 ccminer_LDADD += -lcuda
 
 nvcc_ARCH :=
-#nvcc_ARCH += -gencode=arch=compute_75,code=\"sm_75,compute_75\" # CUDA 10 req.
+nvcc_ARCH += -gencode=arch=compute_75,code=\"sm_75,compute_75\" # CUDA 10 req.
 #nvcc_ARCH += -gencode=arch=compute_72,code=\"sm_72,compute_72\" # CUDA 10 req.
 #nvcc_ARCH += -gencode=arch=compute_70,code=\"sm_70,compute_70\" # CUDA 9.1
 #nvcc_ARCH += -gencode=arch=compute_61,code=\"sm_61,compute_61\" # CUDA 8
-nvcc_ARCH += -gencode=arch=compute_52,code=\"sm_52,compute_52\"
+#nvcc_ARCH += -gencode=arch=compute_52,code=\"sm_52,compute_52\"
 #nvcc_ARCH += -gencode=arch=compute_50,code=\"sm_50,compute_50\"
 #nvcc_ARCH += -gencode=arch=compute_35,code=\"sm_35,compute_35\"
 #nvcc_ARCH += -gencode=arch=compute_30,code=\"sm_30,compute_30\"
@@ -215,7 +215,7 @@ scrypt/nv_kernel.o: scrypt/nv_kernel.cu
 	$(NVCC) $(JANSSON_INCLUDES) -I. @CUDA_INCLUDES@ @CUDA_CFLAGS@ -gencode=arch=compute_35,code=\"sm_35,compute_35\" -o $@ -c $<
 
 scrypt/titan_kernel.o: scrypt/titan_kernel.cu
-	$(NVCC) $(nvcc_FLAGS) -gencode=arch=compute_35,code=\"sm_35,compute_35\" -o $@ -c $<
+	$(NVCC) $(nvcc_FLAGS) -gencode=arch=compute_52,code=\"sm_52,compute_52\" -o $@ -c $<
 
 skein.o: skein.cu
 	$(NVCC) $(nvcc_FLAGS) --maxrregcount=64 -o $@ -c $<
